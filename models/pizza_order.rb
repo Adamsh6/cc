@@ -28,4 +28,16 @@ class PizzaOrder
     db.close
   end
 
+  def PizzaOrder.all
+    db = PG.connect({
+      dbname: 'pizza_shop',
+      host: 'localhost'
+      })
+    sql = "SELECT * FROM pizza_orders"
+    do.prepare("all", sql)
+    orders = do.exec_prepared("all")
+    db.close
+    return orders
+  end
+
 end
