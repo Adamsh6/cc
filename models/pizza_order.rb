@@ -34,10 +34,10 @@ class PizzaOrder
       host: 'localhost'
       })
     sql = "SELECT * FROM pizza_orders"
-    do.prepare("all", sql)
-    orders = do.exec_prepared("all")
+    db.prepare("all", sql)
+    orders = db.exec_prepared("all")
     db.close
-    return orders
+    return orders.map { |order| PizzaOrder.new(order) }
   end
 
 end
