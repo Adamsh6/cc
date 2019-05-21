@@ -1,4 +1,4 @@
-
+require('pg')
 
 class PizzaOrder
 
@@ -11,6 +11,24 @@ class PizzaOrder
     @topping = options['topping']
   end
 
-  
+  def save()
+    db = PG.connect({
+      dbname: 'pizza_shop',
+      host: 'localhost'
+      })
+    sql = "INSERT INTO pizza_orders
+          (first_name,
+            last_name,
+            quantity,
+            topping)
+            VALUES (
+              '#{@first_name}',
+              '#{@last_name}'
+              #{@quantity},
+              '#{@topping}'
+              )"
+    db.exec(sql)
+    db.close
+  end
 
 end
