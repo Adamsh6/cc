@@ -3,6 +3,7 @@ require("pry")
 
 class PizzaOrder
 
+  attr_reader :id
   attr_accessor :first_name, :last_name, :quantity, :topping
 
   def initialize(options)
@@ -29,6 +30,18 @@ class PizzaOrder
     result = db.exec_prepared("save", values)
     # binding.pry
     @id = result[0]['id'].to_i
+    db.close
+  end
+
+  def delete
+    db = PG.connect({
+     dbname: 'pizza_shop',
+     host: 'localhost'
+     })
+    sql = "DELETE FROM pizza_orders WHERE id = $1"
+    values = [@id]
+    db.prepare("delete_one", sql)
+    db.exec_prepared("delete_one", values)
     db.close
   end
 

@@ -26,6 +26,8 @@ order2.save
 
 orders = PizzaOrder.all
 
+order1.delete
+
 
 
 binding.pry
