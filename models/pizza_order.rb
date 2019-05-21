@@ -1,4 +1,5 @@
 require('pg')
+require("pry")
 
 class PizzaOrder
 
@@ -22,10 +23,11 @@ class PizzaOrder
             last_name,
             quantity,
             topping)
-            VALUES ($1, $2, $3, $4)"
+            VALUES ($1, $2, $3, $4) RETURNING *"
     values = [@first_name, @last_name, @quantity, @topping]
     db.prepare("save", sql)
     result = db.exec_prepared("save", values)
+    # binding.pry
     @id = result[0]['id'].to_i
     db.close
   end

@@ -19,8 +19,8 @@ order2 = PizzaOrder.new(
   }
 )
 
-# order1.save
-# order2.save
+order1.save
+order2.save
 
 orders = PizzaOrder.all
 
