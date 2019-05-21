@@ -1,6 +1,8 @@
 require("pry")
 require_relative('models/pizza_order.rb')
 
+PizzaOrder.delete_all
+
 order1 = PizzaOrder.new(
   {
     'first_name' => 'Adam',

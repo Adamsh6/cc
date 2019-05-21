@@ -44,4 +44,15 @@ class PizzaOrder
     return orders.map { |order| PizzaOrder.new(order) }
   end
 
+  def PizzaOrder.delete_all
+    db = PG.connect({
+      dbname: 'pizza_shop',
+      host: 'localhost'
+      })
+    sql = "DELETE FROM pizza_orders"
+    db.prepare("delete_all", sql)
+    db.exec_prepared("delete_all")
+    db.close
+  end
+
 end
