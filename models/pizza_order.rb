@@ -21,13 +21,10 @@ class PizzaOrder
             last_name,
             quantity,
             topping)
-            VALUES (
-              '#{@first_name}',
-              '#{@last_name}'
-              #{@quantity},
-              '#{@topping}'
-              )"
-    db.exec(sql)
+            VALUES ($1, $2, $3, $4)"
+    values = [@first_name, @last_name, @quantity, @topping]
+    db.prepare("save", sql)
+    db.exec_prepared("save", values)
     db.close
   end
 

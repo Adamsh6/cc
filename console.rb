@@ -18,5 +18,9 @@ order2 = PizzaOrder.new(
     'topping' => 'cheese'
   }
 )
+
+order1.save
+order2.save
+
 binding.pry
 nil
