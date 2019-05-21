@@ -24,11 +24,12 @@ order2 = PizzaOrder.new(
 order1.save
 order2.save
 
+order1.first_name = "Alejandro"
+
+order1.update
+
 orders = PizzaOrder.all
 
-order1.delete
-
-
-
+# order1.delete
 binding.pry
 nil

@@ -45,6 +45,21 @@ class PizzaOrder
     db.close
   end
 
+  def update
+    db = PG.connect({
+     dbname: 'pizza_shop',
+     host: 'localhost'
+     })
+    sql = "UPDATE pizza_orders SET
+      (first_name, last_name, quantity, topping)
+      = ($1, $2, $3, $4) WHERE id = $5"
+    values = [@first_name, @last_name, @quantity, @topping, @id]
+    db.prepare("update", sql)
+    db.exec_prepared("update", values)
+    db.close
+  end
+
+
   def PizzaOrder.all
     db = PG.connect({
       dbname: 'pizza_shop',
